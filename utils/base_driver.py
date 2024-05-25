@@ -13,7 +13,7 @@ class BaseDriver():
 
 		elif context['browser'] == 'firefox':
 			options = firefox_options()
-			if context['headless'] == 'true': options.headless = True
+			if context['headless'] == 'true': options.add_argument("--headless")
 			self.driver = webdriver.Firefox(options)
 
 		self.driver.maximize_window()

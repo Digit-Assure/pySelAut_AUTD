@@ -13,17 +13,21 @@ logger = logging.getLogger(__name__)
 def global_setup(request):
 
     logger.info("Global Setup section")
-    '''context will contain all env variables & env specific data stored in configs/env_data.py'''
-    # import pdb;pdb.set_trace()
+
+    '''context will contain all env variables & env specific data stored in configs/env_data'''
     context = get_env_details(request)
 
     '''create an object of HomePage class & add it in context so that it can be shared within test cases'''
-    context['homepage'] = HomePage(context)
+    homepage = HomePage(context)
+    context['homepage'] = homepage
 
     '''now context contains, env data plus class objects'''
     yield context
 
     logger.info("Global Teardown section")
+    homepage.close_browser()
+
+
 
 
 # Test-specific setup and teardown (function scope)
@@ -33,23 +37,23 @@ def test_setup():
     yield
     logger.info("\nTest Teardown section")
 
-def test_example_2(global_setup, test_setup):
-    logger.info("Executing test_example_2")
+def test_login_and_verify_product_homepage(global_setup, test_setup):
 
+    """
+    IMPORTANT, test case name must start with 'test'
+    """
+
+    '''home page object was initialized in global_setup() fixture and the reference is passed as global setup
+    which is the first argument to this test case method'''
     homepage = global_setup['homepage']
-    context = global_setup
 
+
+    '''will visit the home page as per env, baseurl would be taken from configs/env_data'''
     homepage.visit_home_page()
 
-    # homepage_heading = homepage.get_text('.login_logo')
-    homepage.assert_text('.login_logo', 'Swag Labs')
+    '''will login and check few basic assertions on the page'''
+    homepage.verify_home_page()
 
-    homepage.input_text('#user-name', context['login'])
-    homepage.input_text('#password', context['secret'])
-    homepage.click('#login-button')
+    '''sleep is added just so you can see the browser a bit more'''
+    sleep(2)
 
-
-
-
-    sleep(5)
-    assert True

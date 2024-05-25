@@ -3,6 +3,6 @@
 .vscode/
 .idea
 .DS_Store
-allure-report/*.json
+allure-report/*.*
 .venv
 pythonProject
