@@ -1,1 +1,1 @@
-base_url = 'https://www.google.com'
+# we can put any global configs here, as needed

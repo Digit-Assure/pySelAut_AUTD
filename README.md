@@ -4,7 +4,9 @@
 
 ### Features
 - Page Object Model
-- Locators structuring
+- Centralized selectors
+- Passing env variables from command line
+- headless & headed execution
 
 ### Pre-requisite
 - Python 3 (built on 3.12)
@@ -13,4 +15,4 @@
 `pip install -r requirements.txt`
 
 ### How to run
-`pytest -srP --browser chrome --env staging tests/home_page_tests/example_test.py`
+`pytest -srP --browser=chrome --headless=true --env=QA --login=standard_user --secret=secret_sauce tests/example_tests/example_test.py`

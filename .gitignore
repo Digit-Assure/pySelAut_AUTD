@@ -4,3 +4,5 @@
 .idea
 .DS_Store
 allure-report/*.json
+.venv
+pythonProject
