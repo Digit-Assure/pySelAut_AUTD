@@ -19,7 +19,7 @@ class SeleniumWrapper(BaseDriver):
         else:
             self.driver.find_element(By.CSS_SELECTOR, selector).click()
 
-    def input_text(self, selector, text):
+    def type(self, selector, text):
         if selector.startswith('//'):
             self.driver.find_element(By.XPATH, selector).send_keys(text)
         else:
