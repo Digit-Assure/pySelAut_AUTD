@@ -22,12 +22,16 @@ pytest -srP --browser=chrome --headless=false --env=QA --login=standard_user --s
 
 ### Allure Report integration (optional)
 
-## Pre-condition
+#### Pre-condition
 
 1. Node.js should be installed
 2. Java version 8 (jre is sufficient) and above should be installed & JAVA_HOME path should be set
 
 refer https://allurereport.org/docs/install-for-nodejs/
+
+Now install allure-commandline tools
+
+`npm install -g allure-commandline`
 
 To generate allure reports along with pytest run tests like below, some additional file would be now generated in allure-report directory
 
@@ -37,9 +41,7 @@ pytest -srP --browser=chrome --headless=true --env=QA --login=standard_user --se
 
 Run this command to view reports in browser
 
-```
-allure serve allure-report/
-```
+`allure serve allure-report/`
 
 
 
