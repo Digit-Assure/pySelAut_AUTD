@@ -6,18 +6,19 @@
 - Page Object Model (check pages directory)
 - Centralized locator repo (locators/locators.py)
 - Passing env variables from command line (like browser=chrome, env=QA etc)
-- headless & headed execution (--headless=true|false )
-- Cypress like simplified selenium api's such as visit(), type(), click() etc.
+- Headless & headed execution (--headless=true|false)
+- Passing test data file (--testdata=testdata/example_test_data.json)
+- Cypress inspired simplified selenium api's such as visit(), type(), click() etc.
 
 ### Pre-requisite
-- Python 3
+- Python3
 
 ### Installation 
 `pip install -r requirements.txt`
 
 ### How to run
 ```
-pytest -srP --browser=chrome --headless=false --env=QA --login=standard_user --secret=secret_sauce tests/example_tests/example_test.py
+pytest -srP --browser=chrome --headless=false --env=QA --login=standard_user --secret=secret_sauce --testdata=testdata/example_test_data.json tests/example_tests/example_test.py
 ```
 
 ### Allure Report integration (optional)
@@ -33,13 +34,16 @@ Now install allure-commandline tools
 
 `npm install -g allure-commandline`
 
-To generate allure reports along with pytest run tests like below, some additional file would be now generated in allure-report directory
+- To generate allure reports along with pytest run tests like below, some additional file would be now generated in allure-report directory
 
 ```
-pytest -srP --browser=chrome --headless=true --env=QA --login=standard_user --secret=secret_sauce tests/example_tests/example_test.py --alluredir=allure-report
+pytest -srP --browser=chrome --headless=true --env=QA --login=standard_user --secret=secret_sauce --testdata=testdata/example_test_data.json tests/example_tests/example_test.py --alluredir=allure-report
 ```
+- Run this command to convert allure-report into a htm file, this will generate 'html-report/index.html'
 
-Run this command to view reports in browser
+`allure generate --clean --single-file allure-report/ -o html-report`
+
+- Run this command to view reports in browser
 
 `allure serve allure-report/`
 
