@@ -1,6 +1,6 @@
-# PySelAut_AUTD
+# PySelAut
 
-## Python Selenium Automation "Always Up To Date"!
+## Python Selenium Automation Framework!
 
 ### Features
 - Page Object Model (check pages directory)
@@ -32,7 +32,7 @@ refer https://allurereport.org/docs/install-for-nodejs/
 
 Now install allure-commandline tools
 
-`npm install -g allure-commandline`
+`npx install allure-commandline`
 
 - To generate allure reports along with pytest run tests like below, some additional file would be now generated in allure-report directory
 
@@ -41,11 +41,11 @@ pytest -srP --browser=chrome --headless=true --env=QA --login=standard_user --se
 ```
 - Run this command to convert allure-report into a htm file, this will generate 'html-report/index.html'
 
-`allure generate --clean --single-file allure-report/ -o html-report`
+`npx allure generate --clean --single-file allure-report/ -o html-report`
 
 - Run this command to view reports in browser
 
-`allure serve allure-report/`
+`npx allure serve allure-report/`
 
 
 

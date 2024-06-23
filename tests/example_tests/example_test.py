@@ -2,6 +2,7 @@ import pytest
 import logging
 from utils.get_env_details import get_env_details
 from pages.home_page import HomePage
+from pages.login_page import LoginPage
 from time import sleep
 
 logging.getLogger().setLevel(logging.INFO)
@@ -19,7 +20,10 @@ def global_setup(request):
 
     '''create an object of HomePage class & add it in context so that it can be shared within test cases'''
     homepage = HomePage(context)
+    loginpage = LoginPage(context)
+
     context['homepage'] = homepage
+    context['loginpage'] = loginpage
 
     '''now context contains, env data plus class objects'''
     yield context
@@ -46,10 +50,12 @@ def test_login_and_verify_product_homepage(global_setup, test_setup):
     '''home page object was initialized in global_setup() fixture and the reference is passed as global setup
     which is the first argument to this test case method'''
     homepage = global_setup['homepage']
+    loginpage = global_setup['loginpage']
 
 
     '''will visit the home page as per env, baseurl would be taken from configs/env_data'''
-    homepage.visit_home_page()
+    loginpage.visit_login_page()
+    loginpage.login()
 
     '''will login and check few basic assertions on the page'''
     homepage.verify_home_page()

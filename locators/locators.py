@@ -3,5 +3,5 @@ home_page = {
     'username_field': '#user-name',
     'password_field': '#password',
     'login_btn': '#login-button',
-    'home_page_main_heading_txt': '.app_logo'
+    'home_page_main_heading_txt': '.header_label'
 }

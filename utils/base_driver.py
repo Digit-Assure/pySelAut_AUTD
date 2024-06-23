@@ -1,23 +1,28 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options as firefox_options
-from selenium.webdriver.chrome.options import Options as chrome_options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
-class BaseDriver():
+class BaseDriver:
+    driver = None  # Class attribute to store the driver instance
 
-	def __init__(self, context):
+    def __init__(self, context):
+        if not BaseDriver.driver:  # Check if driver instance already exists
+            if context['browser'] == 'chrome':
+                options = ChromeOptions()
+                if context['headless'] == 'true':
+                    options.add_argument("--headless")
+                BaseDriver.driver = webdriver.Chrome(options)
 
-		if context['browser'] == 'chrome':
-			options = chrome_options()
-			if context['headless'] == 'true': options.add_argument("--headless")
-			self.driver = webdriver.Chrome(options)
+            elif context['browser'] == 'firefox':
+                options = FirefoxOptions()
+                if context['headless'] == 'true':
+                    options.add_argument("--headless")
+                BaseDriver.driver = webdriver.Firefox(options)
 
-		elif context['browser'] == 'firefox':
-			options = firefox_options()
-			if context['headless'] == 'true': options.add_argument("--headless")
-			self.driver = webdriver.Firefox(options)
+            BaseDriver.driver.maximize_window()
+            BaseDriver.driver.implicitly_wait(30)
 
-		self.driver.maximize_window()
-		self.driver.implicitly_wait(30)
-	
-	def close_browser(self):
-		self.driver.quit()
+        self.driver = BaseDriver.driver  # Assign the shared driver instance to self.driver
+
+    def close_browser(self):
+        self.driver.quit()
